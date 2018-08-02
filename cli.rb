@@ -1,7 +1,8 @@
 require 'pry'
 
 def welcome
-  puts "Help me help you decide whether to visit a restaurant."
+  puts "Welcome to CJ's 8-ball of lunch options.
+  Help me help you decide whether to visit a restaurant."
 end
 
 def get_character_from_user
