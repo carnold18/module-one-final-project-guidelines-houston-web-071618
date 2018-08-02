@@ -17,10 +17,12 @@ end
   restos = show_restos.map do |biz|
     {
       name: biz['name'],
+      alias: biz['alias'],
       rating: biz['rating'],
       price: biz['price'],
       address: biz['location']['display_address'].join(', '),
-      phone: biz['phone']
+      phone: biz['phone'],
+      transactions: biz['transactions'].join(', ')
     }
   end
 
@@ -28,7 +30,7 @@ end
     Restaurant.create(r)
   end
 
-  # binding.pry
+  binding.pry
 # class Restaurant < ActiveRecord::Base
 
 
