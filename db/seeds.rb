@@ -6,7 +6,6 @@ require_relative '../cli'
 
 def show_restos
   #make the web request
-  #insert key 
   response_hash = JSON.parse(response_string)
   businesses = response_hash["businesses"]
 
