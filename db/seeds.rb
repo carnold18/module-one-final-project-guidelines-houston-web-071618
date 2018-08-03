@@ -5,13 +5,12 @@ require 'pry'
 require_relative '../cli'
 
 def show_restos
-  #make the web request
+  response_string = RestClient.get('https://api.yelp.com/v3/businesses/search?term=lunch&latitude=29.759100&longitude=-95.363398&radius=400&open_now=true', headers = {content_type: "application/json;charset=utf-8", authorization: "Bearer JXu7Wwa0miaPPT1CkKGrX97vdRQJG8cOOyDmG6OkYNmTs55lCGpfG1dyzJUTIjJhkzORD3yFWCWG-gvkttv6eoA5JMzqh5PghtvBtlpZBkwzgSro9YhQfW8aM9phW3Yx"})
   response_hash = JSON.parse(response_string)
+
   businesses = response_hash["businesses"]
 
 end
-
-# def parsing
 
   restos = show_restos.map do |biz|
     {
@@ -29,7 +28,13 @@ end
     Restaurant.create(r)
   end
 
-  binding.pry
+
+
+
+
+
+
+
 # class Restaurant < ActiveRecord::Base
 
 

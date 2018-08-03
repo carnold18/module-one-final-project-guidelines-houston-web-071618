@@ -15,10 +15,10 @@ SEARCH_PATH = "/v3/businesses/search"
 BUSINESS_PATH = "/v3/businesses/"  # trailing / because we append the business id to the path
 
 
-DEFAULT_BUSINESS_ID = "yelp-san-francisco"
-DEFAULT_TERM = "delivery, lunch"
+DEFAULT_BUSINESS_ID = "yelp-houston"
+DEFAULT_TERM = "lunch"
 DEFAULT_LOCATION = "708 S Main St, Houston, TX 77002"
-SEARCH_LIMIT = 10
+SEARCH_LIMIT = 100
 
 
 # Make a request to the Fusion search endpoint. Full documentation is online at:
@@ -53,7 +53,9 @@ def search(term, location)
   params = {
     term: term,
     location: location,
-    limit: SEARCH_LIMIT
+    open_now: true,
+    radius: 400
+    # limit: SEARCH_LIMIT
   }
 
   response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)

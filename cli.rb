@@ -4,13 +4,13 @@ require_relative 'config/environment.rb'
 def welcome
     puts "Welcome to CJ's 8-ball of lunch options.
     You are at Flatiron School Houston.
-    You are hungry. Help me help you decide where to find food."
+    You are hungry. Help me help you decide where to find food. \n \n \n "
 end
 
 def get_do_you_know
   puts "*" * 45
   puts "Do you know the name of the restaurant you want to order from?
-  Answer 'yes' or 'no'."
+  Answer 'yes' or 'no'. \n \n \n "
   # use gets to capture the user's input. This method should return that input, downcased.
   yesno = gets.chomp.downcase
 end
@@ -21,16 +21,19 @@ def know_resto
   puts "*" * 45
   puts "Which restaurant are you interested in? (Type in the name using proper nouns.)"
   resto = gets.chomp
-  #fixed = resto.downcase
-  ##active record find by.name resto
-  puts "Here's your restaurant: "
-  choice = Restaurant.find_by(name: resto)             #case-sensitive???
-    puts choice.name+", rated: "+"#{choice.rating}"+"; great choice! \n Call now: "+choice.phone
 
-  #binding.pry
+  choice = Restaurant.find_by(name: resto)
+
+  if (choice)
+      choice            #case-sensitive
+      puts "Here's your restaurant: \n "+ "#{choice.name}, rated: #{choice.rating}; great choice! \n Call now: #{choice.phone}"
+  else
+    try_again
+    know_resto
+  end
+
 end
 
-# binding.pry
 
 ## If no:
 def get_sorting_method
@@ -49,15 +52,15 @@ end
 
 def choose_resto(sort_meth)
     puts "*" * 45
-    puts "Here's a list of 10 restaurants near you."
+    puts "Here's a list of 10 restaurants near you. \n"
     sort_meth = sort_meth
 
     # sort by sort_meth (if A, then ... if B, then...)
     if sort_meth == "p"
-      #binding.pry
+
       count = 1
       Restaurant.order(:price)[0..9].each do |restaurant|
-        puts "#{count}. " + restaurant.name+", with price range: "+ restaurant.price + " and rated: "+"#{restaurant.rating}"+"; #: "+restaurant.phone
+        puts "#{count}. " + restaurant.name+", with price range: "+ restaurant.price + " and rated: "+"#{restaurant.rating}"
         count += 1
       end
 
@@ -65,7 +68,7 @@ def choose_resto(sort_meth)
     else
       count = 1
       Restaurant.order(:rating)[0..9].each do |restaurant|
-        puts "#{count}. " + restaurant.name+", rated: "+"#{restaurant.rating}"+", with price range: "+ restaurant.price + "; #: "+restaurant.phone
+        puts "#{count}. " + restaurant.name+", rated: "+"#{restaurant.rating}"+", with price range: "+ restaurant.price
         count += 1
       end
 
@@ -84,7 +87,7 @@ end
 
 def enjoy
   puts "*" * 45
-  puts "Go enjoy your lunch. Or dinner. Or snack.  \n Learn, love, code."
+  puts "Go enjoy your lunch. Or dinner. Or snack. \n \n Learn, love, code."
 end
 
 def step1
